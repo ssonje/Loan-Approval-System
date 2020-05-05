@@ -1,0 +1,110 @@
+->		*	Thankx shardul for the introduction,
+		
+		*	As he told earlier the variable names and its desciption,
+		
+		*	Catogerial Variables are as follows :-
+			
+			*	Gender
+			*	Married 
+			*	Dependents and
+			*	Credit history
+			*	Property area
+			
+		*	First of all, importing all the necessary libraries.
+		
+		*	After that storing the test and train dataset in df and train dataframe respectively for further operations.
+		
+		*	Datahack provides seperate train and test csv files.
+		
+		*	Now understanding various features of dataset.
+			
+			Hence we use describe function.
+			
+		*	Now we check weather the catogorial data make sence or not.
+		
+		*	Here we check this with property area
+		
+			*	So there are 3 categorize :-
+				
+				1st is semiurban
+				2nd is Urban and 
+				last is Rural
+				
+		*	Now understanding the distributions of numerical values.
+		
+			*	As of our basic knowledge, we can say that loan approval is based on Applicant income and loan amount.
+			
+			*	First attribute is ApplicantIncome :-
+			
+				*	Hence 1st we observe the outlier for the ApplicantIncome column by plotting the histogram.
+				
+				*	This is the box plot for training dataset.
+				
+				*	The above Box Plot confirms the presence of a lot of outliers/extreme values. 
+					This can be attributed to the income disparity in the society.
+					
+				*	Now to identify the outliers,
+					we plot the box plot for ApplicantIncome by Eduction.
+					
+					And as a result,
+					We can see that there is no substantial different between the mean income of graduate and non-graduates. 
+					But there are a higher number of graduates with very high incomes, which are appearing to be the outliers
+					
+				*	And there are no missing values in the ApplicantIncome column.
+			
+			*	Second attributed is LoanAmount:-
+			
+				*	Now applying same to the LoanAmount, we can see the mean and outliers.
+			
+				*	Now we plot the histogram and Box plot to see the distribution of LoanAmount.
+				
+				*	From the above, we can conclude that 
+					LoanAmount have some missing values and extreme values.
+					
+			*	Now understanding the distribution of categorial data,
+			
+				*	422 loans are approved in total.
+				
+				*	Now we see the creadit history and loan status together.
+				
+					So there were 378 loans were approved having creadit history 1
+					and only 7 were approved having creadit history 0.
+					
+				*	Hence we can conclude from this point is :-
+				
+					If we have creadit history 1, our loan is nearly 80% accepted.
+					
+			*	Now to deal with the outliers,
+				best solution is combine the total income of family to form TotalIncome.
+				
+				Because some applicant may have low income but strong CoApplicantIncome,
+				Hence we combine ApplicantIncome and CoApplicantIncome together to form TotalIncome.
+				
+				Now we can see the distribution and conclude that 
+				The extreme values are practically possible, 
+				i.e. some people might apply for high value loans due to specific needs. 
+				
+				So instead of treating them as outliers
+				let’s try a log transformation to nullify their effect:
+				
+				After performing the log operation on TotalIncome, we get highly distributed data.
+				
+			*	Now we can go for data modeling.
+			
+			*	We are using sklearn for data modeling.
+				And sklearn requires all the inputs to be numberic,
+				And hence here we convert all the categorial variables into numerical values.
+				
+				Before that we need to fill all the missing values in the dataset.
+				
+				After combining, we can see that there are too much missing values.
+				
+				We do the log transformation for LoanAmount also to nullify the effect of outliers.
+				
+			*	Now our taget value is categorial in nature i.e., loan is approved or not.
+				Hence we use logestic regression model.
+				
+				Now Training the model using train dataset and testing it on test dataset.
+				We get the output in the New csv file which has loan_id and loan_status colun.
+				
+			*	We can see the accuracy and cross validation score also.
